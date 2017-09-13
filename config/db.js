@@ -14,24 +14,39 @@ const sequelize = new Sequelize(dbdatabase, dbuser, dbpassword, {
     }
 });
 
-const User = sequelize.define('user', {
-    firstName: {
+const Player = sequelize.define('player', {
+    name: {
         type: Sequelize.STRING
     },
-    lastName: {
+    age: {
         type: Sequelize.STRING
     }
 });
 
-const Post = sequelize.define('post', {
-    firstName: {
+const Team = sequelize.define('team', {
+    name: {
         type: Sequelize.STRING
     },
-    lastName: {
+    info: {
         type: Sequelize.STRING
     }
 });
 
-exports.User = User;
-exports.Post = Post;
+const Coach = sequelize.define('coach', {
+    name: {
+        type: Sequelize.STRING
+    },
+    age: {
+        type: Sequelize.STRING
+    }
+});
+
+Player.belongsTo(Team);
+Coach.hasOne(Team);
+
+sequelize.sync();
+
+exports.Player = Player;
+exports.Team = Team;
+exports.Coach = Coach;
 
